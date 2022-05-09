@@ -1,4 +1,5 @@
-﻿using AelfFund.Web.Services;
+﻿using AelfFund.Web.Models;
+using AelfFund.Web.Services;
 using Microsoft.AspNetCore.Components;
 
 namespace AelfFund.Web.Pages
@@ -7,6 +8,8 @@ namespace AelfFund.Web.Pages
     {
         [Inject]
         public ChainService ChainService { get; set; } = default!;
+
+        public CreateProjectModel Model { get; set; } = new();
 
         public async Task Test()
         {

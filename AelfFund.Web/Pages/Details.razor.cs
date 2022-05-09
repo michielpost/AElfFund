@@ -14,13 +14,15 @@ namespace AelfFund.Web.Pages
 
         public ProjectModel? Project { get; set; }
 
+        public decimal Fund { get; set; }
+
         private int Index = -1; //default value cannot be 0 -> first selectedindex is 0.
         double[] data = { 30, 70 };
         string[] labels = { "Funded", "Needed" };
 
 
 
-        public async Task Test()
+        public async Task FundProject()
         {
             await ChainService.TestAsync();
         }

@@ -5,7 +5,7 @@
         public string Name { get; set; } = default!;
         public string Description { get; set; } = default!;
 
-        public long FundGoal { get; set; }
+        public decimal FundGoal { get; set; }
         public DateTimeOffset EndDate { get; set; }
 
 

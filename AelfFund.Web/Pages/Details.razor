@@ -1,10 +1,10 @@
 ﻿@page "/project/{id}"
-@if(Project == null)
+@if (Project == null)
 {
     return;
 }
 
-<PageTitle>Project details</PageTitle>
+<PageTitle>@Project.Name</PageTitle>
 
 <h1>@Project.Name</h1>
 
@@ -15,13 +15,19 @@
     </MudItem>
 
     <MudItem>
+        <h2>Fund this project</h2>
+        <MudNumericField @bind-Value="Fund" Label="Donate (ELF)" Variant="Variant.Outlined" Step=".2M"></MudNumericField> ELF
+        <MudButton Color="Color.Primary" OnClick="FundProject">Fund</MudButton>
+    </MudItem>
+
+    <MudItem>
         <MudPaper Class="pa-4">
             <MudChart ChartType="ChartType.Pie" InputData="@data" @bind-SelectedIndex="Index" InputLabels="@labels" Width="300px" Height="300px" />
         </MudPaper>
     </MudItem>
 
     <MudItem>
-       <FundTable></FundTable>
+        <FundTable></FundTable>
     </MudItem>
 
 
