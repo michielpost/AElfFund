@@ -8,9 +8,24 @@ namespace AelfFund.Web.Pages
         [Inject]
         public ChainService ChainService { get; set; } = default!;
 
+        [Inject]
+        public NavigationManager NavigationManager { get; set; } = default!;
+
         public async Task Test()
         {
             await ChainService.TestAsync();
+        }
+
+        protected override async Task OnInitializedAsync()
+        {
+            App.MainViewModel.Projects = await ChainService.GetProjects();
+
+            await base.OnInitializedAsync();
+        }
+
+        public void GoToCreate()
+        {
+            NavigationManager.NavigateTo("/create");
         }
 
     }

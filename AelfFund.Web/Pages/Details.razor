@@ -1,0 +1,29 @@
+﻿@page "/project/{id}"
+@if(Project == null)
+{
+    return;
+}
+
+<PageTitle>Project details</PageTitle>
+
+<h1>@Project.Name</h1>
+
+<MudGrid Spacing="2" Justify="Justify.Center">
+
+    <MudItem>
+        <ProjectCard Project="Project"></ProjectCard>
+    </MudItem>
+
+    <MudItem>
+        <MudPaper Class="pa-4">
+            <MudChart ChartType="ChartType.Pie" InputData="@data" @bind-SelectedIndex="Index" InputLabels="@labels" Width="300px" Height="300px" />
+        </MudPaper>
+    </MudItem>
+
+    <MudItem>
+       <FundTable></FundTable>
+    </MudItem>
+
+
+</MudGrid>
+

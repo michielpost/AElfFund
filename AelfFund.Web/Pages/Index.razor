@@ -1,9 +1,28 @@
 ﻿@page "/"
 
-<PageTitle>Index</PageTitle>
+<PageTitle>Community funded aelf projects</PageTitle>
 
-<h1>Hello, world!</h1>
+<h1>Community funded aelf projects</h1>
 
 <button @onclick="Test">
-       TEST
-    </button>
+    TEST
+</button>
+
+   <br />
+                        <MudFab Color="Color.Primary" StartIcon="@Icons.Material.Filled.Add" OnClick="GoToCreate" />
+                        <span>Add your project</span>
+
+<MudGrid Spacing="2" Justify="Justify.Center">
+
+    @foreach(var project in App.MainViewModel.Projects)
+    {
+        <MudItem>
+            <ProjectCard Project=project></ProjectCard>
+        </MudItem>
+    }
+
+</MudGrid>
+
+<h2>Latest fundings</h2>
+
+<FundTable></FundTable>
