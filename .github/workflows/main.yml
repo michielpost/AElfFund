@@ -13,6 +13,8 @@ jobs:
     steps:
     # uses GitHub's checkout action to checkout code form the master branch
     - uses: actions/checkout@v3
+      with:
+        persist-credentials: false
 
     # sets up .NET Core SDK 5.0
     - name: Setup .NET Core SDK
