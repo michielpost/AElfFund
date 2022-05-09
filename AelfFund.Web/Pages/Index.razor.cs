@@ -19,6 +19,7 @@ namespace AelfFund.Web.Pages
         protected override async Task OnInitializedAsync()
         {
             App.MainViewModel.Projects = await ChainService.GetProjects();
+            App.MainViewModel.Funders = await ChainService.GetFunders();
 
             await base.OnInitializedAsync();
         }

@@ -11,9 +11,16 @@ namespace AelfFund.Web.Pages
 
         public CreateProjectModel Model { get; set; } = new();
 
-        public async Task Test()
+        public async Task AddProject()
         {
-            await ChainService.TestAsync();
+            if(!string.IsNullOrEmpty(Model.Name)
+                && !string.IsNullOrEmpty(Model.Description)
+                && Model.FundGoal > 1
+                )
+            {
+                await ChainService.AddProject(Model);
+
+            }
         }
 
     }

@@ -40,6 +40,53 @@ namespace AelfFund.Web.Services
             return Task.FromResult(result);
         }
 
+        internal Task AddProject(CreateProjectModel model)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal Task FundProject(string id, decimal fund)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal Task CancelFunding(string project, decimal amount)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal Task<List<Funder>> GetFunders()
+        {
+            var result = new List<Funder>()
+            {
+                new Funder
+                {
+                     Address = "0xTODO",
+                      Amount = 13m,
+                       Project = "project name global list",
+                        TxId = "000xx0x"
+                }
+            };
+
+            return Task.FromResult<List<Funder>>(result);
+        }
+
+        internal Task<List<Funder>?> GetFundersForProject(string id)
+        {
+            var result = new List<Funder>()
+            {
+                new Funder
+                {
+                     Address = "0xTODO",
+                      Amount = 13m,
+                       Project = "project name",
+                        TxId = "000xx0x"
+                }
+            };
+
+            return Task.FromResult<List<Funder>?>(result);
+        }
+
         public Task<ProjectModel?> GetProject(string id)
         {
             ProjectModel? result = new ProjectModel()
@@ -47,7 +94,8 @@ namespace AelfFund.Web.Services
                 Id = Guid.NewGuid().ToString(),
                 Name = "Test from service",
                 Description = "Test desc 123",
-                FundGoal = 1000123
+                FundGoal = 1023m,
+                FundCurrent = 150m
             };
 
             return Task.FromResult<ProjectModel?>(result);

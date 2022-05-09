@@ -13,18 +13,22 @@ namespace AelfFund.Web.Pages
         public string? Id { get; set; }
 
         public ProjectModel? Project { get; set; }
+        public List<Funder>? Funders { get; set; }
 
         public decimal Fund { get; set; }
 
         private int Index = -1; //default value cannot be 0 -> first selectedindex is 0.
-        double[] data = { 30, 70 };
+        double[] data = { 0,0 };
         string[] labels = { "Funded", "Needed" };
 
 
 
         public async Task FundProject()
         {
-            await ChainService.TestAsync();
+            if(Project != null)
+            {
+                await ChainService.FundProject(Project.Id, Fund);
+            }
         }
 
         protected override async Task OnParametersSetAsync()
@@ -32,6 +36,17 @@ namespace AelfFund.Web.Pages
             if (!string.IsNullOrEmpty(Id))
             {
                 Project = await ChainService.GetProject(Id);
+
+                if(Project != null)
+                {
+                    data[0] = Convert.ToDouble(Project.FundCurrent);
+                    data[1] = Convert.ToDouble(Project.FundNeed);
+
+                    labels[0] = $"Donated ({Project.FundCurrent} ELF)";
+                    labels[1] = $"Needed ({Project.FundNeed} ELF)";
+
+                    Funders = await ChainService.GetFundersForProject(Id);
+                }
             }
 
             await base.OnParametersSetAsync();

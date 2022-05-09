@@ -2,27 +2,30 @@
 
 <PageTitle>Community funded aelf projects</PageTitle>
 
-<h1>Community funded aelf projects</h1>
 
 <button @onclick="Test">
     TEST
 </button>
 
-   <br />
-                        <MudFab Color="Color.Primary" StartIcon="@Icons.Material.Filled.Add" OnClick="GoToCreate" />
-                        <span>Add your project</span>
 
-<MudGrid Spacing="2" Justify="Justify.Center">
+<MudContainer Class="mt-16" MaxWidth="MaxWidth.Medium">
+    <MudText Typo="Typo.h3" GutterBottom="true" Align="Align.Center">Community funded aelf projects</MudText>
+    <MudText Align="Align.Center">Decentralized community funding for aelf projects.</MudText>
+    <MudFab Color="Color.Primary" StartIcon="@Icons.Material.Filled.Add" OnClick="GoToCreate" />
+    <span>Add your project</span>
 
-    @foreach(var project in App.MainViewModel.Projects)
-    {
-        <MudItem>
-            <ProjectCard Project=project></ProjectCard>
-        </MudItem>
-    }
+    <MudGrid Spacing="2" Justify="Justify.Center">
 
-</MudGrid>
+        @foreach (var project in App.MainViewModel.Projects)
+        {
+            <MudItem>
+                <ProjectCard Project=project></ProjectCard>
+            </MudItem>
+        }
 
-<h2>Latest fundings</h2>
+    </MudGrid>
 
-<FundTable></FundTable>
+   <MudText Typo="Typo.h4" GutterBottom="true" Align="Align.Center">Latest donations</MudText>
+
+    <FundTable Funders="App.MainViewModel.Funders"></FundTable>
+</MudContainer>

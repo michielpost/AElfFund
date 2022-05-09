@@ -6,8 +6,10 @@
         public string Name { get; set; } = default!;
         public string Description { get; set; } = default!;
 
-        public long FundGoal { get; set; }
-        public long FundCurrent { get; set; }
+        public decimal FundGoal { get; set; }
+        public decimal FundCurrent { get; set; }
+        public decimal FundNeed => FundGoal - FundCurrent;
+
         public DateTimeOffset EndDate { get; set; }
 
         public bool IsActive { get; set; } = true;

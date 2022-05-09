@@ -4,27 +4,23 @@
 
 <PageTitle>Add a new project</PageTitle>
 
-<h1>Add a new project</h1>
+<MudContainer Class="mt-16" MaxWidth="MaxWidth.Medium">
+    <MudText Typo="Typo.h3" GutterBottom="true" Align="Align.Center">Add a new project</MudText>
 
-<MudGrid>
-    <MudItem xs="12" sm="7">
-        <MudPaper Class="pa-4">
-            <MudForm @ref="form" @bind-IsValid="@success" @bind-Errors="@errors">
-                    <MudTextField T="string" @bind-Value="Model.Name" Label="Project Name" Variant="Variant.Outlined" Required="true" RequiredError="Name is required!"/>
+    <MudGrid Justify="Justify.Center">
+        <MudItem xs="12" sm="7">
+            <MudPaper Class="pa-4">
+                <MudForm>
+                    <MudTextField T="string" @bind-Value="Model.Name" Label="Project Name" Variant="Variant.Outlined" Required="true" RequiredError="Name is required!" />
                     <MudTextField T="string" @bind-Value="Model.Description" Label="Description" Variant="Variant.Outlined" Required="true" RequiredError="Description is required!"></MudTextField>
                     <br />
                     <MudNumericField @bind-Value="Model.FundGoal" Label="Funding goal (ELF)" Variant="Variant.Outlined" Step=".2M"></MudNumericField>
-                   
-                    <div class="d-flex align-center justify-space-between mt-6">
-                        <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Register</MudButton>
-                    </div>
-            </MudForm>   
-        </MudPaper>
-    </MudItem>
-</MudGrid>
-@code {
-    bool success;
-    string[] errors = { };
-    MudForm form = default!;
 
-}
+                    <div class="d-flex align-center justify-space-between mt-6">
+                        <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto" OnClick="AddProject">Register</MudButton>
+                    </div>
+                </MudForm>
+            </MudPaper>
+        </MudItem>
+    </MudGrid>
+</MudContainer>
