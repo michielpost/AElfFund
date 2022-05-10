@@ -21,7 +21,11 @@ namespace AelfFund.Web.Pages
         double[] data = { 0,0 };
         string[] labels = { "Funded", "Needed" };
 
-
+        public async Task ConnectWallet()
+        {
+            await ChainService.ConnectOrInstallWalletAsync();
+            StateHasChanged();
+        }
 
         public async Task FundProject()
         {

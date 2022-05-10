@@ -1,20 +1,28 @@
 ﻿using AelfFund.Web.Models;
+using AelfFund.Web.Shared;
 using Microsoft.JSInterop;
+using MudBlazor;
 
 namespace AelfFund.Web.Services
 {
     public class ChainService
     {
         private readonly IJSRuntime JS;
+        private readonly IDialogService dialogService;
 
-        public ChainService(IJSRuntime js)
+        public ChainService(IJSRuntime js, IDialogService DialogService)
         {
             this.JS = js;
+            dialogService = DialogService;
         }
 
-        public async Task TestAsync()
+        public async Task RefreshViewModel()
         {
-            await JS.InvokeVoidAsync("Test");
+            App.UserViewModel.HasExtension = await HasNightElfAsync();
+            App.UserViewModel.IsConnected = await IsConnectedAsync();
+
+            if (App.UserViewModel.IsConnected)
+                App.UserViewModel.Address = await GetAddressAsync();
         }
 
         public async Task<bool> HasNightElfAsync()
@@ -23,6 +31,20 @@ namespace AelfFund.Web.Services
             Console.WriteLine($"Installed: {result}");
             return result;
         }
+
+        internal async Task ConnectOrInstallWalletAsync()
+        {
+            bool hasNightElf = await HasNightElfAsync();
+
+            if (hasNightElf)
+            {
+                await LoginAsync();
+                await RefreshViewModel();
+            }
+            else
+                dialogService.Show<InstallExtensionDialog>("Install NightElf");
+        }
+
         public async Task<bool> IsConnectedAsync()
         {
             var result = await JS.InvokeAsync<bool>("IsConnected");
@@ -33,6 +55,8 @@ namespace AelfFund.Web.Services
         public async Task<string?> LoginAsync()
         {
             var result = await JS.InvokeAsync<string?>("Login");
+            await RefreshViewModel();
+
             Console.WriteLine($"Login: {result}");
             return string.IsNullOrEmpty(result) ? null : result;
         }
@@ -45,6 +69,7 @@ namespace AelfFund.Web.Services
         public async Task LogoutAsync()
         {
             await JS.InvokeVoidAsync("Logout");
+            await RefreshViewModel();
         }
 
         public Task<List<ProjectModel>> GetProjects()
@@ -129,6 +154,23 @@ namespace AelfFund.Web.Services
             };
 
             return Task.FromResult<ProjectModel?>(result);
+        }
+
+        public async Task<BalanceResult?> GetBalanceAsync()
+        {
+            var result = await JS.InvokeAsync<BalanceResult?>("GetBalance");
+            Console.WriteLine("sym:" + result?.Symbol);
+            return result;
+        }
+
+        public ValueTask<string> UseFaucetAsync()
+        {
+            return JS.InvokeAsync<string>("UseFaucet");
+        }
+
+        public ValueTask<TransactionStatusResult> GetTxStatus(string txId)
+        {
+            return JS.InvokeAsync<TransactionStatusResult>("GetTxStatus", txId);
         }
     }
 }

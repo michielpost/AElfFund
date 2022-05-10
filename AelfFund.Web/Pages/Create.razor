@@ -17,7 +17,14 @@
                     <MudNumericField @bind-Value="Model.FundGoal" Label="Funding goal (ELF)" Variant="Variant.Outlined" Step=".2M"></MudNumericField>
 
                     <div class="d-flex align-center justify-space-between mt-6">
-                        <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto" OnClick="AddProject">Register</MudButton>
+                        @if(App.UserViewModel.IsConnected)
+                        {
+                            <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto" OnClick="AddProject">Register</MudButton>
+                        }
+                        else
+                        {
+                            <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto" OnClick="ConnectWallet">Connect Wallet</MudButton>
+                        }
                     </div>
                 </MudForm>
             </MudPaper>

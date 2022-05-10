@@ -13,7 +13,12 @@
                 <td>@funder.Project</td>
                 <td>@funder.Address.</td>
                 <td>@funder.Amount ELF</td>
-                <td><MudButton OnClick="() => Cancel(funder.Project, funder.Amount)">Cancel</MudButton></td>
+                <td>
+                    @if (CurrentAddress == funder.Address)
+                    {
+                        <MudButton OnClick="() => Cancel(funder.Project, funder.Amount)">Cancel</MudButton>
+                    }
+                </td>
             </tr>
         }
 

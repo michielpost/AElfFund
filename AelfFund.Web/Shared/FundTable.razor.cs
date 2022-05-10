@@ -12,9 +12,16 @@ namespace AelfFund.Web.Shared
         [Inject]
         public ChainService ChainService { get; set; } = default!;
 
+        public string? CurrentAddress { get; set; }
+
         public async Task Cancel(string project, decimal amount)
         {
             await ChainService.CancelFunding(project, amount);
+        }
+
+        protected override async Task OnInitializedAsync()
+        {
+           CurrentAddress = await ChainService.GetAddressAsync();
         }
     }
 }

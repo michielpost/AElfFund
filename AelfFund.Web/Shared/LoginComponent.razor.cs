@@ -15,29 +15,21 @@ namespace AelfFund.Web.Shared
 
         protected override async Task OnInitializedAsync()
         {
-            await RefreshViewModel();
-
+            await ChainService.RefreshViewModel();
         }
 
-        private async Task RefreshViewModel()
-        {
-            App.UserViewModel.HasExtension = await ChainService.HasNightElfAsync();
-            App.UserViewModel.IsConnected = await ChainService.IsConnectedAsync();
-
-            if (App.UserViewModel.IsConnected)
-                App.UserViewModel.Address = await ChainService.GetAddressAsync();
-        }
+       
 
         public async Task Login()
         {
             await ChainService.LoginAsync();
-            await RefreshViewModel();
+            StateHasChanged();
         }
 
         public async Task Logout()
         {
             await ChainService.LogoutAsync();
-            await RefreshViewModel();
+            StateHasChanged();
         }
 
         public void InstallDialog()

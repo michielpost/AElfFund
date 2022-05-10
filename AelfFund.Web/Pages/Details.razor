@@ -33,7 +33,15 @@
            <MudItem>
             <h2>Fund this project</h2>
             <MudNumericField @bind-Value="Fund" Label="Donate (ELF)" Variant="Variant.Outlined" Step=".2M"></MudNumericField> ELF
-            <MudButton Color="Color.Primary" OnClick="FundProject">Fund</MudButton>
+            @if(App.UserViewModel.IsConnected)
+            {
+                <MudButton Color="Color.Primary" OnClick="FundProject">Fund</MudButton>
+            }
+            else
+            {
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto" OnClick="ConnectWallet">Connect Wallet</MudButton>
+            }
+
         </MudItem>
 
            <MudItem>
