@@ -11,9 +11,21 @@ namespace AelfFund.Web.Pages
         [Inject]
         public NavigationManager NavigationManager { get; set; } = default!;
 
-        public async Task Test()
+        public async Task HasNightElf()
         {
-            await ChainService.TestAsync();
+            await ChainService.HasNightElfAsync();
+        }
+        public async Task IsConnected()
+        {
+            await ChainService.IsConnectedAsync();
+        }
+        public async Task Login()
+        {
+            await ChainService.LoginAsync();
+        }
+        public async Task Logout()
+        {
+            await ChainService.LogoutAsync();
         }
 
         protected override async Task OnInitializedAsync()

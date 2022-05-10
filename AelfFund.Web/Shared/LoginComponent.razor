@@ -1,0 +1,17 @@
+﻿@if(App.UserViewModel.HasExtension)
+{
+    if(App.UserViewModel.IsConnected)
+    {
+        <MudText Typo="Typo.body1" Class="ml-3">@App.UserViewModel.Address</MudText>
+        <MudIconButton Icon="@Icons.Material.Filled.Logout" Color="Color.Inherit" Edge="Edge.End" OnClick="Logout" />
+
+    }
+    else
+    {
+        <MudButton Color="Color.Inherit" OnClick="Login">Connect Wallet</MudButton>
+    }
+}
+else
+{
+    <MudButton Color="Color.Inherit" OnClick="InstallDialog">Connect Wallet</MudButton>
+}

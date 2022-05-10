@@ -9,10 +9,7 @@
         @*<MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />*@
         <MudText Typo="Typo.h5" Class="ml-3">Aelf Funding</MudText>
         <MudSpacer />
-       @* @if(App.MainViewModel.IsLoggedIn)
-        {
-        <MudIconButton Icon="@Icons.Material.Filled.Logout" Color="Color.Inherit" Edge="Edge.End" OnClick="Logout" />
-        }*@
+        <LoginComponent></LoginComponent>
     </MudAppBar>
     <MudDrawer @bind-Open="_drawerOpen" ClipMode="DrawerClipMode.Always" Elevation="2">
         @*NavMenu*@

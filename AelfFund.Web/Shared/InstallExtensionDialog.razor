@@ -1,0 +1,21 @@
+﻿<MudDialog>
+    <DialogContent>
+        <div class="d-flex flex-column py-1 center">
+             <MudText Typo="Typo.body1" Class="ml-3">Night Elf extension not detected.</MudText>
+             <br />
+             <MudLink Class="ml-3" Href="https://chrome.google.com/webstore/detail/aelf-explorer-extension-d/mlmlhipeonlflbcclinpbmcjdnpnmkpf" Typo="Typo.body2" Target="_blank">Install Extension</MudLink>
+        </div>
+    </DialogContent>
+    <DialogActions>
+        <MudButton Color="Color.Primary" OnClick="Close">Ok</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    [CascadingParameter]
+    MudDialogInstance MudDialog { get; set; } = default!;
+
+    void Close() => MudDialog.Close(DialogResult.Ok(true));
+
+   
+}

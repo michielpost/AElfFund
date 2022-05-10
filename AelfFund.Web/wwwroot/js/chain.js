@@ -1,23 +1,10 @@
 ﻿//const aelf = new AElf(new AElf.providers.HttpProvider('https://explorer-test-side01.aelf.io/chain'));
-
+//const tokenContractName = 'AElf.ContractNames.Token';
 
 let aelf;
-const tokenContractName = 'AElf.ContractNames.Token';
-
-window.Test = async () => {
-    // get chain status
-    const chainStatus = await aelf.chain.getChainStatus();
-    console.log("ok:");
-    console.log(chainStatus);
-    // get genesis contract address
-   // const GenesisContractAddress = chainStatus.GenesisContractAddress;
-    // get genesis contract instance
-    //const zeroContract = await aelf.chain.contractAt(GenesisContractAddress, newWallet);
-    // Get contract address by the read only method `GetContractAddressByName` of genesis contract
-    //tokenContractAddress = await zeroContract.GetContractAddressByName.call(AElf.utils.sha256(tokenContractName));
-};
-
 let nightElfInstance = null;
+let walletAddress = null;
+
 class NightElfCheck {
     constructor() {
         const readyMessage = 'NightElf is ready';
@@ -64,4 +51,68 @@ nightElfCheck.check.then(message => {
     });
 
 });
+
+window.HasNightElf = async () => {
+    if (window.NightElf) {
+        return true;
+    }
+    else {
+        return false;
+    }
+};
+
+window.IsConnected = async () => {
+    if (window.NightElf && walletAddress) {
+        return true;
+    }
+    else {
+        return false;
+    }
+};
+
+window.GetAddress = () => {
+    return walletAddress;
+};
+
+window.Login = async () => {
+    if (aelf) {
+        let result = await aelf.login({
+            chainId: "AELF",
+            payload: {
+                method: "LOGIN",
+            },
+        });
+
+        console.log(result);
+        walletAddress = JSON.parse(result.detail).address;
+        return walletAddress;
+    }
+
+    return null;
+};
+
+window.Logout = async () => {
+    walletAddress = null;
+    if (aelf) {
+        let result = await aelf.logout({
+                chainId: "AELF",
+                address: walletAddress,
+        });
+
+        console.log(result);
+    }
+};
+
+window.Test = async () => {
+    // get chain status
+    const chainStatus = await aelf.chain.getChainStatus();
+    console.log("ok:");
+    console.log(chainStatus);
+    // get genesis contract address
+    // const GenesisContractAddress = chainStatus.GenesisContractAddress;
+    // get genesis contract instance
+    //const zeroContract = await aelf.chain.contractAt(GenesisContractAddress, newWallet);
+    // Get contract address by the read only method `GetContractAddressByName` of genesis contract
+    //tokenContractAddress = await zeroContract.GetContractAddressByName.call(AElf.utils.sha256(tokenContractName));
+};
 

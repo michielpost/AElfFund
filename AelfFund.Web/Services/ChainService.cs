@@ -17,6 +17,36 @@ namespace AelfFund.Web.Services
             await JS.InvokeVoidAsync("Test");
         }
 
+        public async Task<bool> HasNightElfAsync()
+        {
+            var result = await JS.InvokeAsync<bool>("HasNightElf");
+            Console.WriteLine($"Installed: {result}");
+            return result;
+        }
+        public async Task<bool> IsConnectedAsync()
+        {
+            var result = await JS.InvokeAsync<bool>("IsConnected");
+            Console.WriteLine($"Connected: {result}");
+            return result;
+
+        }
+        public async Task<string?> LoginAsync()
+        {
+            var result = await JS.InvokeAsync<string?>("Login");
+            Console.WriteLine($"Login: {result}");
+            return string.IsNullOrEmpty(result) ? null : result;
+        }
+        public async Task<string?> GetAddressAsync()
+        {
+            var result = await JS.InvokeAsync<string?>("GetAddress");
+            Console.WriteLine($"GetAddress: {result}");
+            return string.IsNullOrEmpty(result) ? null : result;
+        }
+        public async Task LogoutAsync()
+        {
+            await JS.InvokeVoidAsync("Logout");
+        }
+
         public Task<List<ProjectModel>> GetProjects()
         {
             var result = new List<ProjectModel>()
