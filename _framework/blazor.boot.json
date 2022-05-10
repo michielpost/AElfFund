@@ -7,7 +7,7 @@
   "linkerEnabled": true,
   "resources": {
     "assembly": {
-      "AelfFund.Web.dll": "sha256-Lfcmoc0NUHTkrrT1270VUO3P7CqObtT6Vg35vy3\/rKg=",
+      "AelfFund.Web.dll": "sha256-IoYpjGAKeGobYEy3ofZyV8TqoWxJBR3hXDvHd6189MQ=",
       "Microsoft.AspNetCore.Components.dll": "sha256-Kvs9\/xgpoDtSmhMcZ11n6UkNB06WFGgu1DYxFgXJS10=",
       "Microsoft.AspNetCore.Components.Forms.dll": "sha256-KdneSdSeGbAvAFUmcD2ccUlXr8gH4rj8HIQ3eLZcW5s=",
       "Microsoft.AspNetCore.Components.Web.dll": "sha256-MKhQqRnVTtMsh7duAvTSSm6+AeVHmPseOkjNTDPZjpo=",
