@@ -31,7 +31,11 @@ namespace AelfFund.Web.Pages
         {
             if(Project != null)
             {
-                await ChainService.FundProject(Project.Id, Fund);
+                await ChainService.FundProject(Project.Id, "YOU", Fund);
+
+                await ReloadData();
+
+                StateHasChanged();
             }
         }
 
@@ -39,22 +43,26 @@ namespace AelfFund.Web.Pages
         {
             if (!string.IsNullOrEmpty(Id))
             {
-                Project = await ChainService.GetProject(Id);
-
-                if(Project != null)
-                {
-                    data[0] = Convert.ToDouble(Project.FundCurrent);
-                    data[1] = Convert.ToDouble(Project.FundNeed);
-
-                    labels[0] = $"Donated ({Project.FundCurrent} ELF)";
-                    labels[1] = $"Needed ({Project.FundNeed} ELF)";
-
-                    Funders = await ChainService.GetFundersForProject(Id);
-                }
+                await ReloadData();
             }
 
             await base.OnParametersSetAsync();
         }
 
+        private async Task ReloadData()
+        {
+            Project = await ChainService.GetProject(Id);
+
+            if (Project != null)
+            {
+                data[0] = Convert.ToDouble(Project.FundCurrent);
+                data[1] = Convert.ToDouble(Project.FundNeed);
+
+                labels[0] = $"Donated ({Project.FundCurrent} ELF)";
+                labels[1] = $"Needed ({Project.FundNeed} ELF)";
+
+                Funders = await ChainService.GetFundersForProject(Id);
+            }
+        }
     }
 }

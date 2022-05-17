@@ -1,18 +1,79 @@
-﻿using AelfFund.Web.Models;
+﻿using AElfBlazor;
+using AElfBlazor.Models;
+using AelfFund.Web.Models;
 using AelfFund.Web.Shared;
 using Microsoft.JSInterop;
 using MudBlazor;
 
 namespace AelfFund.Web.Services
 {
+
     public class ChainService
     {
-        private readonly IJSRuntime JS;
+        private readonly AElfService aelfService;
         private readonly IDialogService dialogService;
 
-        public ChainService(IJSRuntime js, IDialogService DialogService)
+        private static List<ProjectModel> projects = new List<ProjectModel>()
+            {
+                new ProjectModel()
+                {
+                    Id = "1",
+                    Name = "Test",
+                    Description = "Test desc",
+                    FundGoal = 1000
+                },
+                new ProjectModel()
+                {
+                    Id = "2",
+                    Name = "Test 2",
+                    Description = "Test desc 2",
+                    FundGoal = 1000
+                }
+        };
+
+        private static List<Funder> funders = new List<Funder>()
+            {
+                new Funder
+                {
+                    Address = "qBRsMbWWK7fWDXfJUrTSttQUv9AgvJhnH3YeYSecc2Vryy4b",
+                    Amount = 50m,
+                    Project = "1",
+                },
+                new Funder
+                {
+                    Address = "2X8x84GAUrDf8oJuJL2z7G9sF65aY8pJnvHcmXAUJQBhopePFd",
+                    Amount = 150m,
+                    Project = "1",
+                },
+                new Funder
+                {
+                    Address = "qBRsMbWWK7fWDXfJUrTSttQUv9AgvJhnH3YeYSecc2Vryy4b",
+                    Amount = 300m,
+                    Project = "1",
+                },
+                new Funder
+                {
+                    Address = "qBRsMbWWK7fWDXfJUrTSttQUv9AgvJhnH3YeYSecc2Vryy4b",
+                    Amount = 42m,
+                    Project = "2",
+                },
+                new Funder
+                {
+                    Address = "2X8x84GAUrDf8oJuJL2z7G9sF65aY8pJnvHcmXAUJQBhopePFd",
+                    Amount = 139m,
+                    Project = "2",
+                },
+                new Funder
+                {
+                    Address = "qBRsMbWWK7fWDXfJUrTSttQUv9AgvJhnH3YeYSecc2Vryy4b",
+                    Amount = 7m,
+                    Project = "2",
+                }
+            };
+
+        public ChainService(AElfService aelfService, IDialogService DialogService)
         {
-            this.JS = js;
+            this.aelfService = aelfService;
             dialogService = DialogService;
         }
 
@@ -27,9 +88,16 @@ namespace AelfFund.Web.Services
 
         public async Task<bool> HasNightElfAsync()
         {
-            var result = await JS.InvokeAsync<bool>("HasNightElf");
+            var result = await aelfService.HasNightElfAsync();
             Console.WriteLine($"Installed: {result}");
             return result;
+        }
+
+        public async Task Initialize()
+        {
+            var testnetUrl = "https://explorer-test.aelf.io/chain";
+
+            await aelfService.InitializeNightElfAsync("aelf Funding", testnetUrl);
         }
 
         internal async Task ConnectOrInstallWalletAsync()
@@ -38,6 +106,7 @@ namespace AelfFund.Web.Services
 
             if (hasNightElf)
             {
+                await Initialize();
                 await LoginAsync();
                 await RefreshViewModel();
             }
@@ -47,14 +116,14 @@ namespace AelfFund.Web.Services
 
         public async Task<bool> IsConnectedAsync()
         {
-            var result = await JS.InvokeAsync<bool>("IsConnected");
+            var result = await aelfService.IsConnectedAsync();
             Console.WriteLine($"Connected: {result}");
             return result;
 
         }
         public async Task<string?> LoginAsync()
         {
-            var result = await JS.InvokeAsync<string?>("Login");
+            var result = await aelfService.LoginAsync();
             await RefreshViewModel();
 
             Console.WriteLine($"Login: {result}");
@@ -62,115 +131,104 @@ namespace AelfFund.Web.Services
         }
         public async Task<string?> GetAddressAsync()
         {
-            var result = await JS.InvokeAsync<string?>("GetAddress");
+            var result = await aelfService.GetAddressAsync();
             Console.WriteLine($"GetAddress: {result}");
             return string.IsNullOrEmpty(result) ? null : result;
         }
         public async Task LogoutAsync()
         {
-            await JS.InvokeVoidAsync("Logout");
+            await aelfService.LogoutAsync();
             await RefreshViewModel();
         }
 
         public Task<List<ProjectModel>> GetProjects()
         {
-            var result = new List<ProjectModel>()
-            {
-                new ProjectModel()
-                {
-                    Id = Guid.NewGuid().ToString(),
-                    Name = "Test",
-                    Description = "Test desc",
-                    FundGoal = 1000
-                },
-                new ProjectModel()
-                {
-                    Id = Guid.NewGuid().ToString(),
-                    Name = "Test 2",
-                    Description = "Test desc 2",
-                    FundGoal = 1000
-                }
-            };
+            var result = projects;
 
             return Task.FromResult(result);
         }
 
-        internal Task AddProject(CreateProjectModel model)
+        internal Task<ProjectModel> AddProject(CreateProjectModel model)
         {
-            throw new NotImplementedException();
+            var project = new ProjectModel()
+            {
+                Id = Guid.NewGuid().ToString(),
+                Name = model.Name,
+                Description = model.Description,
+                FundGoal = model.FundGoal,
+                EndDate = model.EndDate,
+                IsActive = true
+            };
+
+            projects.Add(project);
+
+            //TODO: Call smart contract
+
+            return Task.FromResult(project);
         }
 
-        internal Task FundProject(string id, decimal fund)
+        internal Task FundProject(string id, string user, decimal fund)
         {
-            throw new NotImplementedException();
+            var project = projects.Where(x => x.Id == id).FirstOrDefault();
+            if(project != null)
+            {
+                project.FundCurrent += fund;
+
+                funders.Add(new Funder()
+                {
+                    Address = user,
+                    Amount = fund,
+                    Project = id
+                });
+            }
+
+            //TODO: Call smart contract
+
+            return Task.CompletedTask;
         }
 
-        internal Task CancelFunding(string project, decimal amount)
+        internal Task CancelFunding(string id, string user, decimal amount)
         {
-            throw new NotImplementedException();
+            var project = projects.Where(x => x.Id == id).FirstOrDefault();
+            if (project != null)
+            {
+                project.FundCurrent -= amount;
+            }
+
+            //TODO: Call smart contract
+
+            return Task.CompletedTask;
         }
 
         internal Task<List<Funder>> GetFunders()
         {
-            var result = new List<Funder>()
-            {
-                new Funder
-                {
-                     Address = "0xTODO",
-                      Amount = 13m,
-                       Project = "project name global list",
-                        TxId = "000xx0x"
-                }
-            };
+            var result = funders;
 
             return Task.FromResult<List<Funder>>(result);
         }
 
         internal Task<List<Funder>?> GetFundersForProject(string id)
         {
-            var result = new List<Funder>()
-            {
-                new Funder
-                {
-                     Address = "0xTODO",
-                      Amount = 13m,
-                       Project = "project name",
-                        TxId = "000xx0x"
-                }
-            };
+            var result = funders.Where(x => x.Project == id).ToList();
 
             return Task.FromResult<List<Funder>?>(result);
         }
 
         public Task<ProjectModel?> GetProject(string id)
         {
-            ProjectModel? result = new ProjectModel()
-            {
-                Id = Guid.NewGuid().ToString(),
-                Name = "Test from service",
-                Description = "Test desc 123",
-                FundGoal = 1023m,
-                FundCurrent = 150m
-            };
+            var project = projects.Where(x => x.Id == id).FirstOrDefault();
 
-            return Task.FromResult<ProjectModel?>(result);
+            if (project != null)
+                project.FundCurrent = funders.Where(x => x.Project == id).Sum(x => x.Amount);
+
+            return Task.FromResult<ProjectModel?>(project);
         }
 
         public async Task<BalanceResult?> GetBalanceAsync()
         {
-            var result = await JS.InvokeAsync<BalanceResult?>("GetBalance");
-            Console.WriteLine("sym:" + result?.Symbol);
+            var result = await aelfService.GetBalanceAsync();
             return result;
         }
 
-        public ValueTask<string> UseFaucetAsync()
-        {
-            return JS.InvokeAsync<string>("UseFaucet");
-        }
-
-        public ValueTask<TransactionStatusResult> GetTxStatus(string txId)
-        {
-            return JS.InvokeAsync<TransactionStatusResult>("GetTxStatus", txId);
-        }
     }
 }

@@ -8,7 +8,7 @@
 
         public decimal FundGoal { get; set; }
         public decimal FundCurrent { get; set; }
-        public decimal FundNeed => FundGoal - FundCurrent;
+        public decimal FundNeed => FundCurrent >= FundGoal ? 0 : FundGoal - FundCurrent;
 
         public DateTimeOffset EndDate { get; set; }
 

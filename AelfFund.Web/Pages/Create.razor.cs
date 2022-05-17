@@ -9,6 +9,9 @@ namespace AelfFund.Web.Pages
         [Inject]
         public ChainService ChainService { get; set; } = default!;
 
+        [Inject]
+        public NavigationManager NavigationManager { get; set; } = default!;
+
         public CreateProjectModel Model { get; set; } = new();
 
         public async Task ConnectWallet()
@@ -24,7 +27,9 @@ namespace AelfFund.Web.Pages
                 && Model.FundGoal > 1
                 )
             {
-                await ChainService.AddProject(Model);
+                var project = await ChainService.AddProject(Model);
+
+                NavigationManager.NavigateTo($"/project/{project.Id}");
 
             }
         }

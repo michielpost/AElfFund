@@ -1,3 +1,4 @@
+using AElfBlazor;
 using AelfFund.Web;
 using AelfFund.Web.Services;
 using Microsoft.AspNetCore.Components.Web;
@@ -12,6 +13,8 @@ builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.
 builder.Services.AddMudServices();
 
 builder.Services.AddScoped<ChainService>();
+
+builder.Services.AddAElfBlazor();
 
 
 await builder.Build().RunAsync();

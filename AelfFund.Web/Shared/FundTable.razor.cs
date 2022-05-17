@@ -16,7 +16,7 @@ namespace AelfFund.Web.Shared
 
         public async Task Cancel(string project, decimal amount)
         {
-            await ChainService.CancelFunding(project, amount);
+            await ChainService.CancelFunding(project, "YOU", amount);
         }
 
         protected override async Task OnInitializedAsync()

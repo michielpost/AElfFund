@@ -22,7 +22,7 @@ namespace AelfFund.Web.Shared
 
         public async Task Login()
         {
-            await ChainService.LoginAsync();
+            await ChainService.ConnectOrInstallWalletAsync();
             StateHasChanged();
         }
 
