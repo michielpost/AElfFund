@@ -8,7 +8,7 @@ namespace AElf.Contracts.FundingContract
         // You can get address of any contract via GetAddress method, for example:
         // internal Address DAppContractAddress => GetAddress(DAppSmartContractAddressNameProvider.StringName);
 
-        internal FundingContractContainer.FundingContractStub GetHelloWorldContractStub(ECKeyPair senderKeyPair)
+        internal FundingContractContainer.FundingContractStub GetFundingContractStub(ECKeyPair senderKeyPair)
         {
             return GetTester<FundingContractContainer.FundingContractStub>(DAppContractAddress, senderKeyPair);
         }

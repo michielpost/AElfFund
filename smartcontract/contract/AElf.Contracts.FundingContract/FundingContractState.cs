@@ -7,6 +7,7 @@ namespace AElf.Contracts.FundingContract
     /// </summary>
     public class FundingContractState : ContractState
     {
-        public SingletonState<GreetedList> GreetedList { get; set; }
+        public SingletonState<ProjectList> ProjectList { get; set; }
+        public SingletonState<FunderList> FunderList { get; set; }
     }
 }

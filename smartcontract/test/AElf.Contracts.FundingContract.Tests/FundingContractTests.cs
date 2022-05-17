@@ -16,7 +16,7 @@ namespace AElf.Contracts.FundingContract
         {
             // Get a stub for testing.
             var keyPair = SampleAccount.Accounts.First().KeyPair;
-            var stub = GetHelloWorldContractStub(keyPair);
+            var stub = GetFundingContractStub(keyPair);
 
             // Use CallAsync or SendAsync method of this stub to test.
             // await stub.Hello.SendAsync(new Empty())

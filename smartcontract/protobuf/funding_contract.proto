@@ -32,26 +32,44 @@ service FundingContract {
     option (aelf.csharp_state) = "AElf.Contracts.FundingContract.FundingContractState";
 
     // an action defined as a gRPC service method.
-    // this action take a google.protobuf.Empty (placeholder for void) as input
-    // and returns a custom defined type: HelloReturn.
-    rpc Hello (google.protobuf.Empty) returns (HelloReturn) { }
-    rpc GreetTo (google.protobuf.StringValue) returns (GreetToOutput) { }
+    rpc CreateProject (CreateProjectInput) returns (Project) { }
+    rpc FundProject (FundInput) returns (google.protobuf.Empty) { }
 
-    rpc GetGreetedList (google.protobuf.Empty) returns (GreetedList) {
+
+    rpc GetProjectList (google.protobuf.Empty) returns (ProjectList) {
+        option (aelf.is_view) = true;
+    }
+
+    rpc GetFunderList (google.protobuf.Empty) returns (FunderList) {
         option (aelf.is_view) = true;
     }
 }
 
-// a custom message, used as the return type of the Hello action
-message HelloReturn {
-    string Value = 1;
+message ProjectList {
+    repeated Project value = 1;
 }
 
-message GreetToOutput {
+message FunderList {
+    repeated FundInput value = 1;
+}
+
+message CreateProjectInput {
     string name = 1;
-    google.protobuf.Timestamp greet_time = 2;
+    string description = 2;
+    int64 fundgoal = 3;
 }
 
-message GreetedList {
-    repeated string value = 1;
+message Project {
+    string id = 1;
+    string name = 2;
+    string description = 3;
+    int64 fundgoal = 4;
+    int64 fundcurrent = 5;
+    bool isactive = 6;
+}
+
+message FundInput {
+    string projectid = 1;
+    string name = 2;
+    int64 amount = 3;
 }

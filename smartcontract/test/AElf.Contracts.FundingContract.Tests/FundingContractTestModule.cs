@@ -20,7 +20,7 @@ namespace AElf.Contracts.FundingContract
         public override void OnPreApplicationInitialization(ApplicationInitializationContext context)
         {
             var contractCodeProvider = context.ServiceProvider.GetService<IContractCodeProvider>();
-            var contractDllLocation = typeof(Fundingontract).Assembly.Location;
+            var contractDllLocation = typeof(FundingContract).Assembly.Location;
             var contractCodes = new Dictionary<string, byte[]>(contractCodeProvider.Codes)
             {
                 {

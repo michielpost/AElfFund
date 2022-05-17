@@ -8,7 +8,5 @@
         public decimal FundGoal { get; set; }
         public DateTimeOffset EndDate { get; set; }
 
-
-
     }
 }

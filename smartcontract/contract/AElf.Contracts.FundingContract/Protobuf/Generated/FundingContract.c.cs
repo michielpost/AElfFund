@@ -32,34 +32,42 @@ namespace AElf.Contracts.FundingContract {
     static readonly string __ServiceName = "FundingContract";
 
     #region Marshallers
+    static readonly aelf::Marshaller<global::AElf.Contracts.FundingContract.CreateProjectInput> __Marshaller_CreateProjectInput = aelf::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::AElf.Contracts.FundingContract.CreateProjectInput.Parser.ParseFrom);
+    static readonly aelf::Marshaller<global::AElf.Contracts.FundingContract.Project> __Marshaller_Project = aelf::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::AElf.Contracts.FundingContract.Project.Parser.ParseFrom);
+    static readonly aelf::Marshaller<global::AElf.Contracts.FundingContract.FundInput> __Marshaller_FundInput = aelf::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::AElf.Contracts.FundingContract.FundInput.Parser.ParseFrom);
     static readonly aelf::Marshaller<global::Google.Protobuf.WellKnownTypes.Empty> __Marshaller_google_protobuf_Empty = aelf::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Google.Protobuf.WellKnownTypes.Empty.Parser.ParseFrom);
-    static readonly aelf::Marshaller<global::AElf.Contracts.FundingContract.HelloReturn> __Marshaller_HelloReturn = aelf::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::AElf.Contracts.FundingContract.HelloReturn.Parser.ParseFrom);
-    static readonly aelf::Marshaller<global::Google.Protobuf.WellKnownTypes.StringValue> __Marshaller_google_protobuf_StringValue = aelf::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::Google.Protobuf.WellKnownTypes.StringValue.Parser.ParseFrom);
-    static readonly aelf::Marshaller<global::AElf.Contracts.FundingContract.GreetToOutput> __Marshaller_GreetToOutput = aelf::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::AElf.Contracts.FundingContract.GreetToOutput.Parser.ParseFrom);
-    static readonly aelf::Marshaller<global::AElf.Contracts.FundingContract.GreetedList> __Marshaller_GreetedList = aelf::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::AElf.Contracts.FundingContract.GreetedList.Parser.ParseFrom);
+    static readonly aelf::Marshaller<global::AElf.Contracts.FundingContract.ProjectList> __Marshaller_ProjectList = aelf::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::AElf.Contracts.FundingContract.ProjectList.Parser.ParseFrom);
+    static readonly aelf::Marshaller<global::AElf.Contracts.FundingContract.FunderList> __Marshaller_FunderList = aelf::Marshallers.Create((arg) => global::Google.Protobuf.MessageExtensions.ToByteArray(arg), global::AElf.Contracts.FundingContract.FunderList.Parser.ParseFrom);
     #endregion
 
     #region Methods
-    static readonly aelf::Method<global::Google.Protobuf.WellKnownTypes.Empty, global::AElf.Contracts.FundingContract.HelloReturn> __Method_Hello = new aelf::Method<global::Google.Protobuf.WellKnownTypes.Empty, global::AElf.Contracts.FundingContract.HelloReturn>(
+    static readonly aelf::Method<global::AElf.Contracts.FundingContract.CreateProjectInput, global::AElf.Contracts.FundingContract.Project> __Method_CreateProject = new aelf::Method<global::AElf.Contracts.FundingContract.CreateProjectInput, global::AElf.Contracts.FundingContract.Project>(
         aelf::MethodType.Action,
         __ServiceName,
-        "Hello",
-        __Marshaller_google_protobuf_Empty,
-        __Marshaller_HelloReturn);
+        "CreateProject",
+        __Marshaller_CreateProjectInput,
+        __Marshaller_Project);
 
-    static readonly aelf::Method<global::Google.Protobuf.WellKnownTypes.StringValue, global::AElf.Contracts.FundingContract.GreetToOutput> __Method_GreetTo = new aelf::Method<global::Google.Protobuf.WellKnownTypes.StringValue, global::AElf.Contracts.FundingContract.GreetToOutput>(
+    static readonly aelf::Method<global::AElf.Contracts.FundingContract.FundInput, global::Google.Protobuf.WellKnownTypes.Empty> __Method_FundProject = new aelf::Method<global::AElf.Contracts.FundingContract.FundInput, global::Google.Protobuf.WellKnownTypes.Empty>(
         aelf::MethodType.Action,
         __ServiceName,
-        "GreetTo",
-        __Marshaller_google_protobuf_StringValue,
-        __Marshaller_GreetToOutput);
+        "FundProject",
+        __Marshaller_FundInput,
+        __Marshaller_google_protobuf_Empty);
 
-    static readonly aelf::Method<global::Google.Protobuf.WellKnownTypes.Empty, global::AElf.Contracts.FundingContract.GreetedList> __Method_GetGreetedList = new aelf::Method<global::Google.Protobuf.WellKnownTypes.Empty, global::AElf.Contracts.FundingContract.GreetedList>(
+    static readonly aelf::Method<global::Google.Protobuf.WellKnownTypes.Empty, global::AElf.Contracts.FundingContract.ProjectList> __Method_GetProjectList = new aelf::Method<global::Google.Protobuf.WellKnownTypes.Empty, global::AElf.Contracts.FundingContract.ProjectList>(
         aelf::MethodType.View,
         __ServiceName,
-        "GetGreetedList",
+        "GetProjectList",
         __Marshaller_google_protobuf_Empty,
-        __Marshaller_GreetedList);
+        __Marshaller_ProjectList);
+
+    static readonly aelf::Method<global::Google.Protobuf.WellKnownTypes.Empty, global::AElf.Contracts.FundingContract.FunderList> __Method_GetFunderList = new aelf::Method<global::Google.Protobuf.WellKnownTypes.Empty, global::AElf.Contracts.FundingContract.FunderList>(
+        aelf::MethodType.View,
+        __ServiceName,
+        "GetFunderList",
+        __Marshaller_google_protobuf_Empty,
+        __Marshaller_FunderList);
 
     #endregion
 
@@ -84,17 +92,22 @@ namespace AElf.Contracts.FundingContract {
     /// <summary>Base class for the contract of FundingContract</summary>
     public abstract partial class FundingContractBase : AElf.Sdk.CSharp.CSharpSmartContract<AElf.Contracts.FundingContract.FundingContractState>
     {
-      public virtual global::AElf.Contracts.FundingContract.HelloReturn Hello(global::Google.Protobuf.WellKnownTypes.Empty input)
+      public virtual global::AElf.Contracts.FundingContract.Project CreateProject(global::AElf.Contracts.FundingContract.CreateProjectInput input)
       {
         throw new global::System.NotImplementedException();
       }
 
-      public virtual global::AElf.Contracts.FundingContract.GreetToOutput GreetTo(global::Google.Protobuf.WellKnownTypes.StringValue input)
+      public virtual global::Google.Protobuf.WellKnownTypes.Empty FundProject(global::AElf.Contracts.FundingContract.FundInput input)
       {
         throw new global::System.NotImplementedException();
       }
 
-      public virtual global::AElf.Contracts.FundingContract.GreetedList GetGreetedList(global::Google.Protobuf.WellKnownTypes.Empty input)
+      public virtual global::AElf.Contracts.FundingContract.ProjectList GetProjectList(global::Google.Protobuf.WellKnownTypes.Empty input)
+      {
+        throw new global::System.NotImplementedException();
+      }
+
+      public virtual global::AElf.Contracts.FundingContract.FunderList GetFunderList(global::Google.Protobuf.WellKnownTypes.Empty input)
       {
         throw new global::System.NotImplementedException();
       }
@@ -105,9 +118,10 @@ namespace AElf.Contracts.FundingContract {
     {
       return aelf::ServerServiceDefinition.CreateBuilder()
           .AddDescriptors(Descriptors)
-          .AddMethod(__Method_Hello, serviceImpl.Hello)
-          .AddMethod(__Method_GreetTo, serviceImpl.GreetTo)
-          .AddMethod(__Method_GetGreetedList, serviceImpl.GetGreetedList).Build();
+          .AddMethod(__Method_CreateProject, serviceImpl.CreateProject)
+          .AddMethod(__Method_FundProject, serviceImpl.FundProject)
+          .AddMethod(__Method_GetProjectList, serviceImpl.GetProjectList)
+          .AddMethod(__Method_GetFunderList, serviceImpl.GetFunderList).Build();
     }
 
   }
