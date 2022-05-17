@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <RootNamespace>AElf.Contracts.HelloWorldContract</RootNamespace>
+    <RootNamespace>AElf.Contracts.FundingContract</RootNamespace>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
@@ -31,13 +31,13 @@
     </ContractMessage>
   </ItemGroup>
   <ItemGroup>
-    <ContractStub Include="..\..\protobuf\hello_world_contract.proto">
-      <Link>Protobuf\Proto\hello_world_contract.proto</Link>
+    <ContractStub Include="..\..\protobuf\funding_contract.proto">
+      <Link>Protobuf\Proto\funding_contract.proto</Link>
     </ContractStub>
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\contract\AElf.Contracts.HelloWorldContract\AElf.Contracts.HelloWorldContract.csproj" />
+    <ProjectReference Include="..\..\contract\AElf.Contracts.FundingContract\AElf.Contracts.FundingContract.csproj" />
     <ProjectReference Include="..\..\src\AElf.Boilerplate.TestBase\AElf.Boilerplate.TestBase.csproj" />
   </ItemGroup>
 

@@ -4,9 +4,9 @@
  *
  * You can use this as a basic template for new contracts.
  * 
- * When building Boilerplate or the contract project located in the "../contract/AElf.Contracts.HelloWorldContract/" 
+ * When building Boilerplate or the contract project located in the "../contract/AElf.Contracts.FundingContract/" 
  * protoc (the protobuf compiler) will be invoked and this file will produce a .c.cs file and .g.cs file, in the 
- * "../contract/AElf.Contracts.HelloWorldContract/Protobuf/Generated/" folder. 
+ * "../contract/AElf.Contracts.FundingContract/Protobuf/Generated/" folder. 
  */
 
 // the version of the language, use proto3 for contracts
@@ -23,13 +23,13 @@ import "google/protobuf/wrappers.proto";
 
 // the name of the C# namespace in which the contract code will be,
 // generated code will also be in this namespace.
-option csharp_namespace = "AElf.Contracts.HelloWorldContract";
+option csharp_namespace = "AElf.Contracts.FundingContract";
 
 // the contract definition: a gRPC service definition.
-service HelloWorldContract {
+service FundingContract {
 
     // the full name of the C# class that will contain the state (here <namespace>.<state-class-name> format).
-    option (aelf.csharp_state) = "AElf.Contracts.HelloWorldContract.HelloWorldContractState";
+    option (aelf.csharp_state) = "AElf.Contracts.FundingContract.FundingContractState";
 
     // an action defined as a gRPC service method.
     // this action take a google.protobuf.Empty (placeholder for void) as input

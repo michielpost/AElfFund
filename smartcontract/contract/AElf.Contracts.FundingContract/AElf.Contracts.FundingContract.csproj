@@ -2,7 +2,7 @@
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
         <!-- The root namespace -->
-        <RootNamespace>AElf.Contracts.HelloWorldContract</RootNamespace>
+        <RootNamespace>AElf.Contracts.FundingContract</RootNamespace>
         <!-- Mark this project as a contract -->
         <IsContract>true</IsContract>
     </PropertyGroup>
@@ -14,8 +14,8 @@
     </PropertyGroup>
     <ItemGroup>
         <!-- Reference the protobuf definition of the contract -->
-        <ContractCode Include="..\..\protobuf\hello_world_contract.proto">
-            <Link>Protobuf\Proto\hello_world_contract.proto</Link>
+        <ContractCode Include="..\..\protobuf\funding_contract.proto">
+            <Link>Protobuf\Proto\funding_contract.proto</Link>
         </ContractCode>
     </ItemGroup>
 </Project>

@@ -1,13 +1,13 @@
 using Google.Protobuf.WellKnownTypes;
 
-namespace AElf.Contracts.HelloWorldContract
+namespace AElf.Contracts.FundingContract
 {
     /// <summary>
     /// The C# implementation of the contract defined in hello_world_contract.proto that is located in the "protobuf"
     /// folder.
     /// Notice that it inherits from the protobuf generated code. 
     /// </summary>
-    public class HelloWorldContract : HelloWorldContractContainer.HelloWorldContractBase
+    public class Fundingontract : FundingContractContainer.FundingContractBase
     {
         /// <summary>
         /// The implementation of the Hello method. It takes no parameters and returns on of the custom data types

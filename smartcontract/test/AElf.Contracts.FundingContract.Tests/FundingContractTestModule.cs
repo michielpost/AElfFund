@@ -7,24 +7,24 @@ using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp;
 using Volo.Abp.Modularity;
 
-namespace AElf.Contracts.HelloWorldContract
+namespace AElf.Contracts.FundingContract
 {
     [DependsOn(typeof(MainChainDAppContractTestModule))]
-    public class HelloWorldContractTestModule : MainChainDAppContractTestModule
+    public class FundingContractTestModule : MainChainDAppContractTestModule
     {
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
-            context.Services.AddSingleton<IContractInitializationProvider, HelloWorldContractInitializationProvider>();
+            context.Services.AddSingleton<IContractInitializationProvider, FundingContractInitializationProvider>();
         }
 
         public override void OnPreApplicationInitialization(ApplicationInitializationContext context)
         {
             var contractCodeProvider = context.ServiceProvider.GetService<IContractCodeProvider>();
-            var contractDllLocation = typeof(HelloWorldContract).Assembly.Location;
+            var contractDllLocation = typeof(Fundingontract).Assembly.Location;
             var contractCodes = new Dictionary<string, byte[]>(contractCodeProvider.Codes)
             {
                 {
-                    new HelloWorldContractInitializationProvider().ContractCodeName,
+                    new FundingContractInitializationProvider().ContractCodeName,
                     File.ReadAllBytes(contractDllLocation)
                 }
             };

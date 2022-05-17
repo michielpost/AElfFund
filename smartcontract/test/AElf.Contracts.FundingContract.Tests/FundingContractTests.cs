@@ -7,9 +7,9 @@ using Google.Protobuf.WellKnownTypes;
 using Shouldly;
 using Xunit;
 
-namespace AElf.Contracts.HelloWorldContract
+namespace AElf.Contracts.FundingContract
 {
-    public class HelloWorldContractTests : HelloWorldContractTestBase
+    public class FundingContractTests : FundingContractTestBase
     {
         [Fact]
         public async Task Test()

@@ -9,7 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.Modularity;
 
-namespace AElf.Boilerplate.HelloWorldContract.Launcher
+namespace AElf.Boilerplate.FundingContract.Launcher
 {
     public class Startup
     {
