@@ -9,11 +9,11 @@
             <MudAvatar Color="Color.Secondary">@Project.Name.First()</MudAvatar>
         </CardHeaderAvatar>
         <CardHeaderContent>
-            <MudText Typo="Typo.body1">@Project.Name</MudText>
+            <MudText Typo="Typo.body1"><a href="project/@Project.Id">@Project.Name</a></MudText>
             @*<MudText Typo="Typo.body2">...</MudText>*@
         </CardHeaderContent>
         <CardHeaderActions>
-            <MudIconButton Icon="@Icons.Material.Filled.Settings" Color="Color.Default" />
+        @*    <MudIconButton Icon="@Icons.Material.Filled.Settings" Color="Color.Default" />*@
         </CardHeaderActions>
     </MudCardHeader>
     <MudCardContent>

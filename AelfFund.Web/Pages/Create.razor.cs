@@ -14,9 +14,14 @@ namespace AelfFund.Web.Pages
 
         public CreateProjectModel Model { get; set; } = new();
 
+        public string ButtonText { get; set; } = "Connect Wallet";
+
+
         public async Task ConnectWallet()
         {
+            ButtonText = "Connecting...";
             await ChainService.ConnectOrInstallWalletAsync();
+            ButtonText = "Connect Wallet";
             StateHasChanged();
         }
 

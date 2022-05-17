@@ -21,9 +21,13 @@ namespace AelfFund.Web.Pages
         double[] data = { 0,0 };
         string[] labels = { "Funded", "Needed" };
 
+        public string ButtonText { get; set; } = "Connect Wallet";
+
         public async Task ConnectWallet()
         {
+            ButtonText = "Connecting...";
             await ChainService.ConnectOrInstallWalletAsync();
+            ButtonText = "Connect Wallet";
             StateHasChanged();
         }
 

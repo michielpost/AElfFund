@@ -15,7 +15,9 @@
             <ProjectCard Project="Project"></ProjectCard>
         </MudItem>
 
- 
+    </MudGrid>
+
+    <MudGrid Spacing="2">
 
         <MudItem>
             <MudPaper Class="pa-4">
@@ -23,28 +25,38 @@
             </MudPaper>
         </MudItem>
 
-     
 
+        <MudItem>
+            <MudPaper Class="pa-4">
+                <MudText Typo="Typo.h3" GutterBottom="true" Align="Align.Center">Donate</MudText>
+                <MudText GutterBottom="true" Align="Align.Center">Help reach @Project.Name reach the goal of @Project.FundGoal ELF.</MudText>
+                <br />
+                <br />
 
-    </MudGrid>
-
-    <MudGrid Spacing="2" Justify="Justify.Center">
-
-           <MudItem>
-            <h2>Fund this project</h2>
-            <MudNumericField @bind-Value="Fund" Label="Donate (ELF)" Variant="Variant.Outlined" Step=".2M"></MudNumericField> ELF
-            @if(App.UserViewModel.IsConnected)
-            {
-                <MudButton Color="Color.Primary" OnClick="FundProject">Fund</MudButton>
-            }
-            else
-            {
-                <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto" OnClick="ConnectWallet">Connect Wallet</MudButton>
-            }
-
+                <MudNumericField @bind-Value="Fund" Label="Donate (ELF)" Variant="Variant.Outlined" Step=".2M"></MudNumericField>
+                @if (App.UserViewModel.IsConnected)
+                {
+                    <MudButton Color="Color.Primary" OnClick="FundProject">Fund</MudButton>
+                }
+                else
+                {
+                    <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto" OnClick="ConnectWallet">@ButtonText</MudButton>
+                }
+            </MudPaper>
         </MudItem>
 
-           <MudItem>
+    </MudGrid>
+    <br />
+    <br />
+    <MudGrid Spacing="2" Justify="Justify.Center">
+        <MudItem>
+            <MudText Typo="Typo.h2" GutterBottom="true" Align="Align.Center">Fund this project</MudText>
+            <br />
+            @if (!Funders?.Any() ?? false)
+            {
+                <MudText Typo="Typo.h3" GutterBottom="true" Align="Align.Center">This project did not receive funding yet.</MudText>
+            }
+
             <FundTable Funders="Funders"></FundTable>
         </MudItem>
     </MudGrid>

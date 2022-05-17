@@ -12,6 +12,8 @@ namespace AelfFund.Web.Shared
         [Inject]
         public IDialogService DialogService { get; set; } = default!;
 
+        public string ButtonText { get; set; } = "Connect Wallet";
+
 
         protected override async Task OnInitializedAsync()
         {
@@ -22,7 +24,9 @@ namespace AelfFund.Web.Shared
 
         public async Task Login()
         {
+            ButtonText = "Connecting...";
             await ChainService.ConnectOrInstallWalletAsync();
+            ButtonText = "Connect Wallet";
             StateHasChanged();
         }
 

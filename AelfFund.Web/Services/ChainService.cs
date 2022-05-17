@@ -18,16 +18,16 @@ namespace AelfFund.Web.Services
                 new ProjectModel()
                 {
                     Id = "1",
-                    Name = "Test",
-                    Description = "Test desc",
-                    FundGoal = 1000
+                    Name = "aelf CYBER Metaverse",
+                    Description = "The aelf CYBER Metaverse will feature a cyber cafe where you can play games and talk to other visitors in the Metaverse. We need funding to hire a designer to make it look really great.",
+                    FundGoal = 7500
                 },
                 new ProjectModel()
                 {
                     Id = "2",
-                    Name = "Test 2",
-                    Description = "Test desc 2",
-                    FundGoal = 1000
+                    Name = "Betting DAO",
+                    Description = "This Betting DAO will offer betting games. All profit will go directly to the DAO and will be used to fund the development of new games.",
+                    FundGoal = 50000
                 }
         };
 
@@ -37,37 +37,37 @@ namespace AelfFund.Web.Services
                 {
                     Address = "qBRsMbWWK7fWDXfJUrTSttQUv9AgvJhnH3YeYSecc2Vryy4b",
                     Amount = 50m,
-                    Project = "1",
+                    ProjectId = "1",
                 },
                 new Funder
                 {
                     Address = "2X8x84GAUrDf8oJuJL2z7G9sF65aY8pJnvHcmXAUJQBhopePFd",
                     Amount = 150m,
-                    Project = "1",
+                    ProjectId = "1",
                 },
                 new Funder
                 {
                     Address = "qBRsMbWWK7fWDXfJUrTSttQUv9AgvJhnH3YeYSecc2Vryy4b",
                     Amount = 300m,
-                    Project = "1",
+                    ProjectId = "1",
                 },
                 new Funder
                 {
                     Address = "qBRsMbWWK7fWDXfJUrTSttQUv9AgvJhnH3YeYSecc2Vryy4b",
                     Amount = 42m,
-                    Project = "2",
+                    ProjectId = "2",
                 },
                 new Funder
                 {
                     Address = "2X8x84GAUrDf8oJuJL2z7G9sF65aY8pJnvHcmXAUJQBhopePFd",
                     Amount = 139m,
-                    Project = "2",
+                    ProjectId = "2",
                 },
                 new Funder
                 {
                     Address = "qBRsMbWWK7fWDXfJUrTSttQUv9AgvJhnH3YeYSecc2Vryy4b",
                     Amount = 7m,
-                    Project = "2",
+                    ProjectId = "2",
                 }
             };
 
@@ -174,11 +174,11 @@ namespace AelfFund.Web.Services
             {
                 project.FundCurrent += fund;
 
-                funders.Add(new Funder()
+                funders.Insert(0, new Funder()
                 {
                     Address = user,
                     Amount = fund,
-                    Project = id
+                    ProjectId = id
                 });
             }
 
@@ -204,12 +204,22 @@ namespace AelfFund.Web.Services
         {
             var result = funders;
 
+            foreach (var funder in result)
+            {
+                funder.ProjectName = projects.Where(x => x.Id == funder.ProjectId).Select(x => x.Name).FirstOrDefault();
+            }
+
             return Task.FromResult<List<Funder>>(result);
         }
 
         internal Task<List<Funder>?> GetFundersForProject(string id)
         {
-            var result = funders.Where(x => x.Project == id).ToList();
+            var result = funders.Where(x => x.ProjectId == id).ToList();
+
+            foreach(var funder in result)
+            {
+                funder.ProjectName = projects.Where(x => x.Id == funder.ProjectId).Select(x => x.Name).FirstOrDefault();
+            }
 
             return Task.FromResult<List<Funder>?>(result);
         }
@@ -219,7 +229,7 @@ namespace AelfFund.Web.Services
             var project = projects.Where(x => x.Id == id).FirstOrDefault();
 
             if (project != null)
-                project.FundCurrent = funders.Where(x => x.Project == id).Sum(x => x.Amount);
+                project.FundCurrent = funders.Where(x => x.ProjectId == id).Sum(x => x.Amount);
 
             return Task.FromResult<ProjectModel?>(project);
         }

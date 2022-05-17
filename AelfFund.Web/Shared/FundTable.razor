@@ -1,7 +1,8 @@
 ﻿<MudSimpleTable Style="overflow-x: auto;">
     <thead>
         <tr>
-            <th>Name</th>
+            <th>Project</th>
+            <th>Address</th>
             <th>Donated</th>
             <th></th>
         </tr>
@@ -10,13 +11,13 @@
         @foreach (var funder in Funders)
         {
             <tr>
-                <td>@funder.Project</td>
+                <td><a href="project/@funder.ProjectId" style="text-decoration: underline;">@funder.ProjectName</a></td>
                 <td>@funder.Address.</td>
                 <td>@funder.Amount ELF</td>
                 <td>
                     @if (CurrentAddress == funder.Address)
                     {
-                        <MudButton OnClick="() => Cancel(funder.Project, funder.Amount)">Cancel</MudButton>
+                        <MudButton OnClick="() => Cancel(funder.ProjectId, funder.Amount)">Cancel</MudButton>
                     }
                 </td>
             </tr>
