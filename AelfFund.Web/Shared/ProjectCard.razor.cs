@@ -13,7 +13,7 @@ namespace AelfFund.Web.Shared
 
         public void GoToDetails()
         {
-            NavigationManager.NavigateTo($"/project/{Project?.Id}");
+            NavigationManager.NavigateTo($"project/{Project?.Id}");
         }
     }
 }

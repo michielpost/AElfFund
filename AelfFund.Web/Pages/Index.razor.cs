@@ -21,7 +21,7 @@ namespace AelfFund.Web.Pages
 
         public void GoToCreate()
         {
-            NavigationManager.NavigateTo("/create");
+            NavigationManager.NavigateTo("create");
         }
 
     }

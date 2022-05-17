@@ -29,7 +29,7 @@ namespace AelfFund.Web.Pages
             {
                 var project = await ChainService.AddProject(Model);
 
-                NavigationManager.NavigateTo($"/project/{project.Id}");
+                NavigationManager.NavigateTo($"project/{project.Id}");
 
             }
         }
