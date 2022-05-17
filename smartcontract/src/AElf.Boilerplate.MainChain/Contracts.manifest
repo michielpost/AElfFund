@@ -1,0 +1,14 @@
+AElf.Contracts.Configuration
+AElf.Contracts.Consensus.AEDPoS
+AElf.Contracts.CrossChain
+AElf.Contracts.Election
+AElf.Contracts.Profit
+AElf.Contracts.MultiToken
+AElf.Contracts.Parliament
+AElf.Contracts.Vote
+AElf.Contracts.TokenConverter
+AElf.Contracts.Treasury
+AElf.Contracts.Economic
+AElf.Contracts.Referendum
+AElf.Contracts.Association
+AElf.Contracts.TokenHolder
