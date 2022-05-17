@@ -51,17 +51,20 @@ namespace AelfFund.Web.Pages
 
         private async Task ReloadData()
         {
-            Project = await ChainService.GetProject(Id);
-
-            if (Project != null)
+            if (!string.IsNullOrEmpty(Id))
             {
-                data[0] = Convert.ToDouble(Project.FundCurrent);
-                data[1] = Convert.ToDouble(Project.FundNeed);
+                Project = await ChainService.GetProject(Id);
 
-                labels[0] = $"Donated ({Project.FundCurrent} ELF)";
-                labels[1] = $"Needed ({Project.FundNeed} ELF)";
+                if (Project != null)
+                {
+                    data[0] = Convert.ToDouble(Project.FundCurrent);
+                    data[1] = Convert.ToDouble(Project.FundNeed);
 
-                Funders = await ChainService.GetFundersForProject(Id);
+                    labels[0] = $"Donated ({Project.FundCurrent} ELF)";
+                    labels[1] = $"Needed ({Project.FundNeed} ELF)";
+
+                    Funders = await ChainService.GetFundersForProject(Id);
+                }
             }
         }
     }
