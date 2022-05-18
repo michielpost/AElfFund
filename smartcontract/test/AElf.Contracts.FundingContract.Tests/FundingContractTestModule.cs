@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using AElf.Boilerplate.TestBase;
 using AElf.ContractTestBase;
@@ -14,6 +15,8 @@ namespace AElf.Contracts.FundingContract
     {
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
+            CultureInfo.CurrentCulture = new CultureInfo("en-US", false);
+
             context.Services.AddSingleton<IContractInitializationProvider, FundingContractInitializationProvider>();
         }
 
