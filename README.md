@@ -12,6 +12,8 @@ This project was created for the [aelf Legend-X Hackathon](https://aelf.devpost.
 - Donate ELF tokens to other projects to reach their funding goal
 - Easily donate ELF using the Night Elf browser extension
 
+## Video
+https://vimeo.com/712071822
 
 ## Screenshots
 View the project list
