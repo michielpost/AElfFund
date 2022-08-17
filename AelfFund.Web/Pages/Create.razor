@@ -1,6 +1,8 @@
 ﻿@page "/create"
 @using System.Text.RegularExpressions
 @using System.ComponentModel.DataAnnotations
+@using AelfFund.Web.Models
+@inject UserViewModel BindingContext
 
 <PageTitle>Add a new project - aelf Funding</PageTitle>
 
@@ -17,7 +19,7 @@
                     <MudNumericField @bind-Value="Model.FundGoal" Label="Funding goal (ELF)" Variant="Variant.Outlined" Step=".2M"></MudNumericField>
 
                     <div class="d-flex align-center justify-space-between mt-6">
-                        @if(App.UserViewModel.IsConnected)
+                        @if(BindingContext.IsConnected)
                         {
                             <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto" OnClick="AddProject">Register</MudButton>
                         }

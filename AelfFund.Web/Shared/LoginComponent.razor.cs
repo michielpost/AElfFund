@@ -18,9 +18,13 @@ namespace AelfFund.Web.Shared
         protected override async Task OnInitializedAsync()
         {
             await ChainService.RefreshViewModel();
+            BindingContext.PropertyChanged += BindingContext_PropertyChanged;
         }
 
-       
+        private void BindingContext_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            this.StateHasChanged();
+        }
 
         public async Task Login()
         {

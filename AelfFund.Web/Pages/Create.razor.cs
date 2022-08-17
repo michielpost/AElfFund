@@ -16,6 +16,16 @@ namespace AelfFund.Web.Pages
 
         public string ButtonText { get; set; } = "Connect Wallet";
 
+        protected override void OnInitialized()
+        {
+            base.OnInitialized();
+            BindingContext.PropertyChanged += BindingContext_PropertyChanged;
+        }
+
+        private void BindingContext_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            this.StateHasChanged();
+        }
 
         public async Task ConnectWallet()
         {

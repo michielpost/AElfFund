@@ -1,5 +1,6 @@
 using AElfBlazor;
 using AelfFund.Web;
+using AelfFund.Web.Models;
 using AelfFund.Web.Services;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
@@ -16,5 +17,6 @@ builder.Services.AddScoped<ChainService>();
 
 builder.Services.AddAElfBlazor();
 
+builder.Services.AddSingleton<UserViewModel>();
 
 await builder.Build().RunAsync();

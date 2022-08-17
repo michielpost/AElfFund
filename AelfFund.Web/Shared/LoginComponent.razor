@@ -1,8 +1,11 @@
-﻿@if(App.UserViewModel.HasExtension)
+﻿@using AelfFund.Web.Models
+@inject UserViewModel BindingContext
+
+@if(BindingContext.HasExtension)
 {
-    if(App.UserViewModel.IsConnected)
+    if(BindingContext.IsConnected)
     {
-        <MudText Typo="Typo.body1" Class="ml-3">@App.UserViewModel.Address</MudText>
+        <MudText Typo="Typo.body1" Class="ml-3">@BindingContext.Address</MudText>
         <MudIconButton Icon="@Icons.Material.Filled.Logout" Color="Color.Inherit" Edge="Edge.End" OnClick="Logout" />
 
     }

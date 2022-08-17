@@ -12,10 +12,11 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="AElfBlazor" Version="0.2.1" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.5" />
-		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.5" PrivateAssets="all" />
-		<PackageReference Include="MudBlazor" Version="6.0.10" />
+		<PackageReference Include="AElfBlazor" Version="0.2.2" />
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.8" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.8" PrivateAssets="all" />
+		<PackageReference Include="MudBlazor" Version="6.0.14" />
 	</ItemGroup>
 
 </Project>

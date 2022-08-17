@@ -1,6 +1,9 @@
 ﻿using AelfFund.Web.Models;
 using AelfFund.Web.Services;
+using CommunityToolkit.Mvvm.Messaging.Messages;
+using CommunityToolkit.Mvvm.Messaging;
 using Microsoft.AspNetCore.Components;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace AelfFund.Web.Pages
 {
@@ -8,6 +11,9 @@ namespace AelfFund.Web.Pages
     {
         [Inject]
         public ChainService ChainService { get; set; } = default!;
+
+        [Inject]
+        public UserViewModel BindingContext { get; set; } = default!;
 
         [Parameter]
         public string? Id { get; set; }
@@ -22,6 +28,17 @@ namespace AelfFund.Web.Pages
         string[] labels = { "Funded", "Needed" };
 
         public string ButtonText { get; set; } = "Connect Wallet";
+
+        protected override void OnInitialized()
+        {
+            base.OnInitialized();
+            BindingContext.PropertyChanged += BindingContext_PropertyChanged;
+        }
+
+        private void BindingContext_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            this.StateHasChanged();
+        }
 
         public async Task ConnectWallet()
         {
@@ -71,5 +88,6 @@ namespace AelfFund.Web.Pages
                 }
             }
         }
+
     }
 }

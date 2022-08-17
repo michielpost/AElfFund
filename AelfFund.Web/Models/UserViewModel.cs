@@ -1,9 +1,23 @@
-﻿namespace AelfFund.Web.Models
+﻿
+using CommunityToolkit.Mvvm.ComponentModel;
+
+namespace AelfFund.Web.Models
 {
-    public class UserViewModel
+    [ObservableObject]
+    [ObservableRecipient]
+    public partial class UserViewModel
     {
-        public bool HasExtension { get; set; }
-        public bool IsConnected { get; set; }
-        public string? Address { get; set; }
+        [ObservableProperty]
+        [NotifyPropertyChangedRecipients] 
+        private bool hasExtension;
+
+        [ObservableProperty]
+        [NotifyPropertyChangedRecipients]
+        private bool isConnected;
+
+        [ObservableProperty]
+        [NotifyPropertyChangedRecipients]
+        private string? address;
+       
     }
 }

@@ -12,7 +12,7 @@ namespace AelfFund.Web.Services
     {
         private readonly AElfService aelfService;
         private readonly IDialogService dialogService;
-
+        private readonly UserViewModel userViewModel;
         private static List<ProjectModel> projects = new List<ProjectModel>()
             {
                 new ProjectModel()
@@ -71,19 +71,20 @@ namespace AelfFund.Web.Services
                 }
             };
 
-        public ChainService(AElfService aelfService, IDialogService DialogService)
+        public ChainService(AElfService aelfService, IDialogService DialogService, UserViewModel userViewModel)
         {
             this.aelfService = aelfService;
             dialogService = DialogService;
+            this.userViewModel = userViewModel;
         }
 
         public async Task RefreshViewModel()
         {
-            App.UserViewModel.HasExtension = await HasNightElfAsync();
-            App.UserViewModel.IsConnected = await IsConnectedAsync();
+            userViewModel.HasExtension = await HasNightElfAsync();
+            userViewModel.IsConnected = await IsConnectedAsync();
 
-            if (App.UserViewModel.IsConnected)
-                App.UserViewModel.Address = await GetAddressAsync();
+            if (userViewModel.IsConnected)
+                userViewModel.Address = await GetAddressAsync();
         }
 
         public async Task<bool> HasNightElfAsync()

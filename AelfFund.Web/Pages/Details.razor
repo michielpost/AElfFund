@@ -1,4 +1,6 @@
 ﻿@page "/project/{id}"
+@using AelfFund.Web.Models
+
 @if (Project == null)
 {
     return;
@@ -34,7 +36,7 @@
                 <br />
 
                 <MudNumericField @bind-Value="Fund" Label="Donate (ELF)" Variant="Variant.Outlined" Step=".2M"></MudNumericField>
-                @if (App.UserViewModel.IsConnected)
+                @if (BindingContext.IsConnected)
                 {
                     <MudButton Color="Color.Primary" OnClick="FundProject">Fund</MudButton>
                 }
